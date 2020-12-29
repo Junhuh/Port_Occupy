@@ -1,0 +1,31 @@
+import socket
+import select
+
+sockets = []
+
+for port in range(10000,20001):
+    try:
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        server_socket.bind(('127.0.0.1', port))
+        print('Bind UDP on ' + str(port))
+        sockets.append(server_socket)
+    except Exception as e:
+        pass
+    continue
+
+empty = []
+while True:
+    readable, writable, exceptional = select.select(sockets, empty, empty)
+    for s in readable:
+        try:
+            (client_data, client_address) = s.recvfrom(1024)
+            print (client_address, client_data)
+        except Exception as e:
+            pass
+        continue
+for s in sockets:
+    try:
+        s.close()
+    except Exception as e:
+        pass
+    continue
