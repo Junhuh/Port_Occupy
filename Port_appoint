@@ -1,0 +1,22 @@
+import socket
+import sys
+import time
+
+port_occupy1 = sys.argv[1]
+# port_occupy2 = sys.argv[2]
+
+# for 
+s1 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# s2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s1.bind(('127.0.0.1', int(port_occupy1)))
+# s2.bind(('127.0.0.1', int(port_occupy2)))
+print('Bind UDP on ' + port_occupy1)
+# print('Bind UDP on ' + port_occupy2)
+while True:
+    data, addr = s2.recvfrom(1024)
+    sleep(3)
+    # data, addr = s2.recvfrom(1024)
+    # sleep(3)
+    #print('Received from %s:%s.' % addr)
+    #s1.sendto(b'hello, %s!' % data, addr)
+    #s1.sendto(b'hello, %s!' % data, addr)
